@@ -1,0 +1,22 @@
+{
+  "enabled": true,
+  "name": "Optimize on Save",
+  "description": "Führt automatische Optimierungen durch wenn Dateien gespeichert werden",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "*.js",
+      "*.ts",
+      "*.jsx",
+      "*.tsx",
+      "*.cs",
+      "*.cpp",
+      "*.c"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Überprüfe die gespeicherte Datei auf Performance-Optimierungen für schwache Hardware und schlage Verbesserungen vor"
+  }
+}

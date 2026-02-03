@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "Online Build Trigger",
+  "description": "Startet Online-Build wenn Agent-Ausführung stoppt",
+  "version": "1",
+  "when": {
+    "type": "agentStop"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Prüfe ob ein Online-Build (GitHub Actions, Vercel, etc.) gestartet werden sollte und führe ihn aus"
+  }
+}

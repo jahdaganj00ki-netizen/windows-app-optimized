@@ -1,0 +1,52 @@
+name: Windows Build & Release
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  release:
+    types: [ created ]
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    
+    strategy:
+      matrix:
+        architecture: [x64, x86]
+        
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Run tests
+      run: npm test
+    
+    - name: Build application
+      run: npm run build:${{ matrix.architecture }}
+      
+    - name: Create installer
+      run: npm run package:${{ matrix.architecture }}
+    
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: windows-${{ matrix.architecture }}
+        path: dist/
+        
+    - name: Release
+      if: github.event_name == 'release'
+      uses: softprops/action-gh-release@v1
+      with:
+        files: dist/*.exe
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
