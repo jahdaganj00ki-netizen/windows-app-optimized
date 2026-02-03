@@ -35,3 +35,9 @@ Führe als Administrator aus:
 ```powershell
 .\scripts\optimize-windows.ps1
 ```
+
+## Online-Build Status
+🚀 **Automatische Builds aktiv!** 
+- Repository: https://github.com/jahdaganj00ki-netizen/windows-app-optimized
+- Builds laufen automatisch bei jedem Push
+- Windows x64 & x86 Builds verfügbar
